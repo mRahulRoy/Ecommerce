@@ -19,3 +19,5 @@ const sendEmail = async (options) => {
   await transporter.sendMail(mailOptions);
 };
 module.exports = sendEmail;
+
+// Read this for nodemailer error: https://stackoverflow.com/questions/45478293/username-and-password-not-accepted-when-using-nodemailer
