@@ -5,7 +5,7 @@ module.exports = (err, req, res, next) => {
     err.statusCode = err.statusCode || 500;
     err.message = err.message || "Internal Server Error";
 
-    // console.log("MiddleWARE IS CALLELD  ", err.message)
+    console.log("MiddleWARE IS CALLELD  ", err.message)
 
     // Handling cast error. cast error is occurs when a short id or invalid request is passed instead of the full id.
     if (err.name === "CastError") {

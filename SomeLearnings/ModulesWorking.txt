@@ -1,0 +1,1 @@
+bcryptjs is used to make password strong or convert the user password into a hash code and then store in into the database
