@@ -3,7 +3,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const User = require("../models/usersModel");
 const sendToken = require("../utils/jwtTokens");
 const sendEmail = require("../utils/sendEmail.js");
-
+const crypto = require("crypto");
 // Register User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -29,12 +29,12 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   }
 
   const user = await User.findOne({ email: email }).select("+password");
-
+  console.log(user);
   if (!user) {
     return next(new ErrorHandler("Invalid email or password", 401));
   }
 
-  const isPasswordMatched = user.comparePassword(password);
+  const isPasswordMatched = await user.comparePassword(password);
 
   if (!isPasswordMatched) {
     return next(new ErrorHandler("Invalid email or password", 401));
@@ -86,4 +86,134 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
     return next(new ErrorHandler(error.message, 500));
   }
+});
+
+// Reset Password
+exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
+  //creating token hash
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.token)
+    .digest("hex");
+
+  const user = await User.findOne({
+    resetPasswordToken: resetPasswordToken,
+    resetPasswordExpire: { $gt: Date.now() }, //gt means greater
+  });
+  if (!user) {
+    return next(
+      new ErrorHandler("Reset Password Token is inavlid or has expired", 400)
+    );
+  }
+  if (req.body.password !== req.body.confirmPassword) {
+    return next(new ErrorHandler("Password does not match", 400));
+  }
+  user.password = req.body.password;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
+  await user.save();
+  sendToken(user, 200, res);
+});
+
+// get user details, only logged in user can access this function or see the data
+//users can see thier details by using this method
+exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+// Update user password
+exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.user.id).select("+password");
+  const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
+
+  if (!isPasswordMatched) {
+    return next(new ErrorHandler("Old password is Incorrect", 401));
+  }
+
+  if (req.body.newPassword !== req.body.confirmPassword) {
+    return next(new ErrorHandler("Password doesnot matched", 400));
+  }
+
+  user.password = req.body.newPassword;
+  await user.save();
+  sendToken(user, 200, res);
+});
+
+// Update user Profile
+exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+  };
+  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+    new: true,
+    runValidators: true,
+    userFindAndModify: true,
+  });
+
+  res.status(200).json({
+    success: true,
+    message: "user updated succesfully",
+  });
+});
+
+
+// get all resgisterd users (admin can view details of any user)
+exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
+  const users = await User.find();
+  res.status(200).json({
+    users,
+  })
+});
+
+// get single users (admin can view details of any user)
+exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  if(!user){
+    return next(new ErrorHandler(`user doesnot exists with id ${req.params.id}`))
+  }
+
+  res.status(200).json({
+    user,
+  })
+});
+
+
+// update user role by admin
+exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+    roll: req.body.roll,
+  };
+  const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+    new: true,
+    runValidators: true,
+    userFindAndModify: true,
+  });
+
+  res.status(200).json({
+    success: true,
+    message: "user Role updated succesfully",
+  });
+});
+
+
+// delete user by admin
+exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  if(!user){
+    return next(new ErrorHandler(`User doesnot exists with if ${req.params.id}`));
+  }else{
+    await user.remove();
+  }
+  res.status(200).json({
+    success: true,
+    message: "user deleted succesfully",
+  });
 });

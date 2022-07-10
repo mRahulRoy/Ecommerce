@@ -9,6 +9,5 @@ module.exports = function (thefunc) {
         console.log("Err func called")
         console.log("functiom os ", thefunc)
         return Promise.resolve(thefunc(req, res, next)).catch(next);
-        console.log("Valuse is : ", val);
     };
 };
