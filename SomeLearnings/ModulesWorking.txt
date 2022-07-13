@@ -1,1 +1,7 @@
 bcryptjs is used to make password strong or convert the user password into a hash code and then store in into the database
+/
+Order of functions/middleware execution for error handling
+At very first ErrorHandler() is getting called whenever a next() is called with the argument as next(new ErrorHandler("ErrorMessage",errorStatusCode)). After this ErrorMessage and errorStatusCode is passed to the error.js middleware in paramter err from there we are sending the err respone to the server/user.
+After sending the ErrorHandler object instance to the error.js we are checking what type of error is occured and sending that ErrorMessage as a respone to the server/user.
+
+/

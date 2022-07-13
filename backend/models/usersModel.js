@@ -53,11 +53,12 @@ const userSchema = new mongoose.Schema({
 
   Post is same as .pre method, Post gets invoked after the event passed in post function gets executed.
 */
-/*Here we are HASHING the password by 10 salting rounds. And then saving it in the database */
 userSchema.pre("save", async function (next) {
+  //This is checking if the password is changed/modified or not, if not modified then simply call the next or if has modified then it will not exceute the 'if' body and will hash the password.
   if (!this.isModified("password")) {
     next();
   }
+  /*Here we are HASHING the password by 10 salting rounds. And then saving it in the database */
   this.password = await bcrypt_js.hash(this.password, 10);
 });
 
@@ -67,16 +68,24 @@ Here we are adding a custom method in the usersSchema named 'getJWTToken' by usi
 
 /*Creating JWT Token*/
 userSchema.methods.getJWTToken = function () {
+  //here we are generating a token and sending some data with this like id or any required detail
+  /*JWT sign method is used for creating a token that takes three arguments, one is a response object, and the second one is a secret key and the last one is an options object for better use of the token. */
+  /* Syntax: jwt.sign(payload, secretOrPrivateKey, [options, callback])
+    If a callback is supplied, the callback is called with the err or the JWT.
+  */
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
 };
 
+// Method for comparing Old and New password
 userSchema.methods.comparePassword = async function (enteredPassword) {
+  //return true of passwords are same else false.
   return await bcrypt_js.compare(enteredPassword, this.password);
 };
 
-//Generating Password Reset Token 
+
+//Generating Password Reset Token
 userSchema.methods.getResetPasswordToken = function () {
   /* The crypto module provides a way of handling encrypted data. */
   //Generating token

@@ -1,3 +1,5 @@
+//Mine understanding for this file status: All Good.
+
 const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
@@ -33,6 +35,14 @@ const orderSchema = new mongoose.Schema({
       price: {
         type: Number,
         required: true,
+        // Adding custom validation for the price
+        validate: {
+          validator: (price) => {
+            return price > 0; //return bool value
+          },
+          // this message will be invoked when the above function returns false
+          message: "Price can not be less than 0",
+        },
       },
       quantity: {
         type: Number,
