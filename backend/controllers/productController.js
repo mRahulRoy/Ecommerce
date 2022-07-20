@@ -22,8 +22,9 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
 /* ------------------------------ Get All Product by Admin ------------------------------*/
 
-exports.getAllProducts = catchAsyncErrors(async (req, res) => {
-  const resultPerPage = 5;
+exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
+  // return next(new ErrorHandler("Product Not Found",500));
+  const resultPerPage = 4;
   const productCount = await Product.countDocuments();
   //Filters and search functionality
   const api_Feature = new ApiFeatures(Product.find(), req.query)
@@ -33,7 +34,7 @@ exports.getAllProducts = catchAsyncErrors(async (req, res) => {
 
   //Here assigning  api_Feature.query in :products becouse we are saving all the data in query variabe in the  api_Feature class.
   const products = await api_Feature.query;
-  res.status(200).json({ message: "Success", products, productCount });
+  res.status(200).json({ message: "Success", products, productCount,resultPerPage });
 });
 
 /* ------------------------------ Update Product by Admin ------------------------------*/
@@ -132,7 +133,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
   //just finding the average and storing it in the document.
   product.ratings = avg / product.reviews.length;
 
-  await product.save({ validateBeforeSave: false });//remember before saving a pre method will be called in proudctSchema file. This is just for my knowledge
+  await product.save({ validateBeforeSave: false }); //remember before saving a pre method will be called in proudctSchema file. This is just for my knowledge
   res.status(200).json({
     success: true,
     product,
@@ -178,7 +179,7 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
   const numOfReviews = reviews.length;
 
   //Here we are updating the reviews in the database
-   product = await Product.findByIdAndUpdate(
+  product = await Product.findByIdAndUpdate(
     req.query.productId,
     { reviews, ratings, numOfReviews },
     {
@@ -187,7 +188,7 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
       useFindAndModify: false,
     }
   );
-    
+
   res.status(200).json({
     success: true,
     message: "product review deleted",

@@ -1,0 +1,111 @@
+.banner{
+    background-image: linear-gradient(to right,#635dc0,#3027ae);
+    margin-bottom: 20px;
+    height: 100vmin;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    color :azure
+}
+.banner > h1{
+    margin: 5vmax;
+    font: 600 2.5vmax "Roboto";
+}
+.banner >p{
+    font: 300 1.5vmax "Lucida Sans";
+
+}
+.banner > a > button {
+    margin-bottom: 5vmax;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 2px;
+    padding: 2px;
+    width: 100px;
+    height: 40px;
+    transform: all 0.2s;
+    font: 300 1.5vmax "Roboto";
+}
+.banner > a > button:hover{
+    background-color: #635dc0;
+    color: white;
+    outline: none;
+    border-radius: 5px;
+}
+.banner::after{
+    content: "";
+    width: 100vw;
+    height: 120vmin;
+    background-color: #ffffff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    clip-path: polygon(100% 74%, 0 100%, 100% 100%);
+}
+
+
+.homeHeading{
+    text-align: center;
+    font: 2vmax "Roboto";
+    width: 200px;
+    border-bottom: 1px solid;
+    margin: 0 auto;
+    color: rgba(0, 0, 0, 0.851);
+    
+}
+
+/* product card container */
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80vw;
+    justify-content: center;
+    margin: 2vmax auto;
+}
+
+/* product card */
+.productCard{
+    width: 14vmax;
+    text-decoration: none;
+    color: rgb(48, 48, 48);
+    display: flex;
+    margin:2vmax;
+    box-shadow: 2px 3px 10px black;
+    flex-direction: column;
+    transition: all 0.25s;
+    padding-bottom:0.5vmax;
+}
+
+.productCard > img{
+    width: 14vmax;
+
+    margin-bottom: 5px;
+}
+.productCard > div{
+    margin: 0.5vmax;
+    display: flex;
+    justify-content: flex-start;
+}
+.productCard > div > span{
+    margin: 0.5vmax;
+    font: 300 0.9vmax "Roboto";
+}
+.productCard > p {
+    font-family: "Roboto";
+    font-size: 1.2vmax;
+    margin: 0vmax 0.5vmax;
+    color: tomato;
+}
+.productCard > span{
+    margin: 05vmax 0.5vmax;
+    color: tomato;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1vmax;
+}
+.productCard:hover{
+    transform: scale(.9);
+}

@@ -1,0 +1,62 @@
+.productsHeading{
+    text-align: center;
+    width: 15vw;
+    margin: 2vmax auto;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.171);
+    color: rgba(0, 0, 0, 0.678);
+    font: 500 1.5vmax "Roboto";
+}   
+.products{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 5vmax;
+    justify-content: center;
+}
+
+/* pagination */
+.paginationBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 6vmax;
+}
+
+/* This is the default class of the pagination component remember  */
+.pagination{
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+}
+.page-Item{
+    list-style: none;
+    background-color: white;
+    border: 1px solid;
+    padding: 1vmax 1.5vmax;
+    transition: all 0.5s linear;
+}
+.page-Item:first-child{
+    border-radius: 5px 0 0 5px;
+}
+.page-Item:last-child{
+    border-radius: 0 5px 5px 0;
+}
+
+.page-Link{
+    text-decoration: none;
+    font: 300 1vmax "Roboto";
+    color: rgb(139, 0, 0);
+    transition: all 0.5s linear;
+}
+
+.page-Item:hover{
+    background-color: rgb(234, 233, 236);
+}
+.page-Item:hover .page-Link{
+    color: rgba(80, 80, 80, 1);
+}
+.pageItemActive{
+    background-color: rgb(234, 35, 0);
+}
+.pageLinkActive{
+   color: rgb(255, 255, 255);
+}

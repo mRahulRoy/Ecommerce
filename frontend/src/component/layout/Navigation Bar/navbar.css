@@ -1,0 +1,101 @@
+.preNav{
+    width: 100%;
+    padding: 0 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    background-color: rgb(0, 0, 0);
+}
+.preNav .socials,.preNav .navsupport{
+    width: 15%;
+    height: inherit;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.preNav .socials .social-icon{
+    font-size: 1.2rem;
+    color: white;
+}
+.preNav .navsupport span{
+    color: white;
+    font-size: 0.8rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.navContainer .left {
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navContainer .left img{
+    width: 84px;
+    margin-bottom: 6px;
+}
+.navContainer{
+    height: 60px;
+    background-color: RGB(19, 25, 33);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+}
+
+.navContainer .center{
+    width: 60%;
+    /* border: 2px solid ; */
+}
+.navContainer .center input[type="text"]{
+    padding-left: 10px;
+}
+
+.navContainer .center input{
+    width: 85%;
+    height: 35px;
+}
+.navContainer .right {
+    height: 35px;
+    width: 20%;
+    display: flex;
+    /* align-items: center; */
+   
+}
+.navContainer .right .login{
+    width: 100px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.navContainer .right .login > span{
+    color: white;
+}
+.navContainer .right .navCartIcon{
+    width: 50px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+
+}
+.navContainer .right  .navCartIcon .cartIcon{
+    color: white;
+    font-size: 1.4rem;
+}
+.navContainer .center .searchBox input:last-child{
+    width: 10%;
+    height: 36px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    transition: all 0.5s;
+    background-color: tomato;
+    font: 400 0.9rem "Roboto";
+    text-align: center;
+    border-radius: 3px;
+    padding: 0.5vmax;
+    outline: none;
+}

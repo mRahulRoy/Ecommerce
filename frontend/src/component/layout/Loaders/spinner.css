@@ -1,0 +1,28 @@
+.box{
+    width: 100vw;
+    min-height: 100vh;
+    z-index: 666;
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box .circle{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+
+    border-bottom: 2px solid;
+    animation: move 600ms linear infinite;
+}
+@keyframes move {
+    0%{
+        /* transform: rotate(0deg); */
+    }
+    100%{
+        transform: rotate(-360deg);
+    }
+    
+}
