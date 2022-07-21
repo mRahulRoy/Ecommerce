@@ -85,6 +85,10 @@
     color: white;
     font-size: 1.4rem;
 }
+.navContainer .center .searchBox input:first-child{
+    border: none;
+    outline: none;
+}
 .navContainer .center .searchBox input:last-child{
     width: 10%;
     height: 36px;
@@ -95,7 +99,9 @@
     background-color: tomato;
     font: 400 0.9rem "Roboto";
     text-align: center;
-    border-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
     padding: 0.5vmax;
     outline: none;
 }
+

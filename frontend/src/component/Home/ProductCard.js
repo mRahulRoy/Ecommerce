@@ -4,6 +4,7 @@ import ReactStars from "react-rating-stars-component";
 import man from "../../Images/attire 2.webp";
 
 const ProductCart = ({ product }) => {
+  /*This options is for Rating stars, basically we are styling the stars here */
   const options = {
     edit: false,
     color: "rgba(20,20,20,0.1)",
@@ -12,8 +13,10 @@ const ProductCart = ({ product }) => {
     value: product.ratings,
     isHalf: true,
   };
+  
   return (
     <>
+    {/* onclicked to this component this will set the route as "to" passed in the Link tag */}
       <Link className="productCard" to={`/product/${product._id}`}>
         <img src={man} alt="product" />
         <p>{product.name}</p>

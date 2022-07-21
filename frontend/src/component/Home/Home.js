@@ -1,36 +1,33 @@
+//Mine UnderStanding is clear for this file
 import React, { Fragment } from "react";
 import { CgMouse } from "react-icons/cg";
 import "./HomeStyle.css";
-import Product from "./ProductCart.js";
+import Product from "./ProductCard.js";
 import man from "../../Images/attire 2.webp";
 import MetaData from "../layout/MetaData";
-import { clearErrors, getProduct } from "../../Actions/productAction";
+import { clearErrors, getProducts } from "../../Actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Spinner from "../layout/Loaders/Spinner";
 import { useAlert } from "react-alert";
+import Carousel from "react-material-ui-carousel";
 
-const product = {
-  name: "laptop",
-  image: [{ url: man }],
-  price: "$1000",
-  _id: "rahul12122",
-};
 const Home = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
+
   const { loading, error, products, productsCount } = useSelector(
     (state) => state.products
   );
-  console.log()
+
   useEffect(() => {
     if (error) {
-       alert.error(error);
+      alert.error(error);
       dispatch(clearErrors);
-
     }
-    dispatch(getProduct());
-  }, [dispatch, error,alert]);
+
+    dispatch(getProducts());
+  }, [dispatch, error, alert]);
 
   return (
     <>
@@ -50,11 +47,15 @@ const Home = () => {
               </a>
             </div>
 
+            {/* Rendering Products-HomePage */}
+
             <h2 className="homeHeading">Featured Product</h2>
 
             <div className="container" id="container">
               {products &&
-                products.map((product) => <Product key={product._id}  product={product} />)}
+                products.map((product) => (
+                  <Product key={product._id} product={product} />
+                ))}
             </div>
           </Fragment>
         )}

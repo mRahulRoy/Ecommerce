@@ -1,3 +1,4 @@
+//Mine UnderStanding is clear for this file
 import React, { Fragment, useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
 import "./productDetails.css";
@@ -12,24 +13,26 @@ import { useAlert } from "react-alert";
 
 const ProductDetails = ({ match }) => {
   const alert = useAlert();
-  //in backend we have req.params.id but in frontend we have match.params.id
+  //in backend we have req.params.id but in frontend we have match.params.id so to access the route parameters we are using useParams Hook.
   const { id } = useParams();
+
   const dispatch = useDispatch();
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
 
   console.log(product);
+  
   // console.log(products);
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
-    dispatch(getProductDetails(id)); //in backend we have req.params.id but in frontend we have match.params.id
+    dispatch(getProductDetails(id)); 
   }, [dispatch, id, error, alert]);
 
-  // options for react stars
+  // options for react stars or just a CSS for Stars
   const options = {
     edit: false,
     color: "rgba(20,20,20,0.1)",
@@ -46,6 +49,8 @@ const ProductDetails = ({ match }) => {
       ) : (
         <Fragment>
           <div className="ProductDetails">
+
+            {/* Carousel Image container */}
             <div className="box1">
               <Carousel className="caro" animation="slide" duration={800}>
                 {product.images &&
@@ -60,6 +65,7 @@ const ProductDetails = ({ match }) => {
               </Carousel>
             </div>
 
+          {/* Product Information container */}
             <div className="box2">
               <div className="detailsBlock-1">
                 <h2>{product.name}</h2>
@@ -100,9 +106,13 @@ const ProductDetails = ({ match }) => {
               <button className="submitReview">Submit Review</button>
             </div>
           </div>
-
+          
+          {/*Reviews Rendering for the particular Product */}
+          
+            
+          
           <h3 className="reviewHeading">Reviews</h3>
-          {product.reviews && product.reviews[0] ? (
+          {product.reviews  ? ( 
             <div className="reviews">
               {product.reviews &&
                 product.reviews.map((review) => <ReviewCard review={review} />)}

@@ -1,29 +1,32 @@
+//Mine UnderStanding is clear for this file
 import React, { Fragment, useEffect, useState } from "react";
 import "./Products.css";
 import { useSelector, useDispatch } from "react-redux";
-import { getProduct, clearErrors } from "../../Actions/productAction";
+import { getProducts, clearErrors } from "../../Actions/productAction";
 import Spinner from "../layout/Loaders/Spinner";
-import ProductCard from "../Home/ProductCart";
+import ProductCard from "../Home/ProductCard";
 import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination"
+
 const Products = () => {
+
   const dispatch = useDispatch();
   const params = useParams();
-    const [currentPage,setCurrentPage] = useState(1);
-    console.log(currentPage);
+  const [currentPage,setCurrentPage] = useState(1);
+    
   const { products, loading, error, productsCount,resultPerPage } = useSelector(
     (state) => state.products
   );
-    console.log(resultPerPage);
-    console.log(productsCount);
+
+
     const setCurrentPageNo = (e)=>{
-        console.log(e);
         setCurrentPage(e);
     }
 
 
   useEffect(() => {
-    dispatch(getProduct(params.keyword,currentPage));
+    // getting the product according to the search thats why passing the keyword and page
+    dispatch(getProducts(params.keyword,currentPage));
   }, [dispatch, params.keyword,currentPage]);
 
   return (
