@@ -2,6 +2,7 @@ import React from "react";
 import { ReactNavbar } from "overlay-navbar";
 import logo from "../../../Images/2phone.jfif";
 const options = {
+  burgerColor: "#eb4034",
   burgerColorHover: "#eb4034",
   logo,
   logoWidth: "20vmax",
@@ -35,7 +36,7 @@ const options = {
 };
 const Header = () => {
   return (
-    <div style={{display:"none"}}>
+    <div style={{ display: "none" }}>
       <ReactNavbar {...options} />
     </div>
   );

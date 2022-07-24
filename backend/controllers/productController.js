@@ -29,12 +29,26 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   //Filters and search functionality
   const api_Feature = new ApiFeatures(Product.find(), req.query)
     .search()
-    .filter()
-    .pagination(resultPerPage);
+    .filter();
 
-  //Here assigning  api_Feature.query in :products becouse we are saving all the data in query variabe in the  api_Feature class.
-  const products = await api_Feature.query;
-  res.status(200).json({ message: "Success", products, productCount,resultPerPage });
+  let products = await api_Feature.query;
+
+  let filteredProductsCount = products.length;
+  api_Feature.pagination(resultPerPage);
+
+  /*Here assigning  api_Feature.query in :products becouse we are saving all the data in query variabe in the  api_Feature class . using clone function here becouse we are executing a same query twice , at line 34 and 40 , so  mongoose is throwing the error " Query was already executed: Product.find({ price: { '$gte': 0, 
+  '$lte': 25000 } })"*/
+  
+  products = await api_Feature.query.clone();
+  res
+    .status(200)
+    .json({
+      message: "Success",
+      products,
+      productCount,
+      resultPerPage,
+      filteredProductsCount,
+    });
 });
 
 /* ------------------------------ Update Product by Admin ------------------------------*/

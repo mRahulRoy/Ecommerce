@@ -4,16 +4,12 @@ import Header from "./component/layout/Header/Header.js";
 import Footer from "./component/layout/footer/Footer.js";
 import webFont from "webfontloader";
 import Products from "./component/Product/Products.js";
-import ProductDetails from "./component/Product/ProductDetails.js"
+import ProductDetails from "./component/Product/ProductDetails.js";
 import Spinner from "./component/layout/Loaders/Spinner.js";
 import NavBar from "./component/layout/Navigation Bar/NavBar";
 import { useEffect } from "react";
-import "./App.css"
-
-
-
-
-
+import "./App.css";
+import LoginSignUp from "./component/User/LoginSignUp";
 
 function App() {
   useEffect(() => {
@@ -26,16 +22,16 @@ function App() {
 
   return (
     <Router>
-      <NavBar/>
+      <NavBar />
       <Header />
 
       <Routes>
-        <Route exact path="/" element={<Home/>} />
-        <Route exact path="/Home" element={<Home/>} />
-        <Route exact path="/product/:id" element={<ProductDetails/>} />
-        <Route exact path="/products" element={<Products/>} />
-        <Route exact path="/products/:keyword" element={<Products/>} />
-       
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/login" element={<LoginSignUp />} />
+        <Route exact path="/Home" element={<Home />} />
+        <Route exact path="/product/:id" element={<ProductDetails />} />
+        <Route exact path="/products" element={<Products />} />
+        <Route exact path="/products/:keyword" element={<Products />} />
       </Routes>
 
       <Footer />

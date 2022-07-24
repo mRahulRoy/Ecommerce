@@ -10,6 +10,7 @@ import man from "../../Images/attire 2.webp";
 import ReviewCard from "./ReviewCard.js";
 import Spinner from "../layout/Loaders/Spinner";
 import { useAlert } from "react-alert";
+import MetaData from "../layout/MetaData";
 
 const ProductDetails = ({ match }) => {
   const alert = useAlert();
@@ -48,6 +49,8 @@ const ProductDetails = ({ match }) => {
         <Spinner />
       ) : (
         <Fragment>
+        <MetaData title={product.name}/>
+
           <div className="ProductDetails">
 
             {/* Carousel Image container */}

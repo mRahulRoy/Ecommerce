@@ -72,7 +72,6 @@ const NavBar = () => {
           </div>
 
           <div className="navCartIcon">
-
             <BsCart3 className="cartIcon" />
           </div>
         </div>
