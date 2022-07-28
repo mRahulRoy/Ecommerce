@@ -25,7 +25,7 @@ const categories = [
 const Products = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
-  const params = useParams();
+  const params = useParams();//This helps in getting request query/parameter from the url
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 25000]);
   const [category, setCategory] = useState("");
@@ -74,7 +74,8 @@ const Products = () => {
           </div>
 
           <div className="filterbox">
-            <Typography>Price</Typography>
+         
+            <Typography>Price</Typography> {/* Acts as a paragraph */}
             <Slider
               value={price}
               // This onchange automatically passes two arguments to the function priceHandler one is the event itself and the second one is array of size two having starting range and ending range just like this [0,25000]

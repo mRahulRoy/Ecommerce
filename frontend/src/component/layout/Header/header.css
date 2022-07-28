@@ -1,0 +1,15 @@
+.menuBurger {
+    width: 3vmax;
+    height: 3.8vmax ;
+    position: absolute;
+    top: 0vmax ;
+    left: 2vmax;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 1vmax;
+    overflow: hidden;
+    z-index: 1000;
+}

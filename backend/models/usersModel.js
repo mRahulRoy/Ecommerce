@@ -39,6 +39,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "user",
   },
+  createdAt: { type: Date, default: Date.now },
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });
@@ -83,7 +84,6 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
   //return true of passwords are same else false.
   return await bcrypt_js.compare(enteredPassword, this.password);
 };
-
 
 //Generating Password Reset Token
 userSchema.methods.getResetPasswordToken = function () {

@@ -1,7 +1,8 @@
+//This file's understandind is clear.
 import React from "react";
 import { Link } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
-import man from "../../Images/attire 2.webp";
+import man from "../../Images/attire 1.webp";
 
 const ProductCart = ({ product }) => {
   /*This options is for Rating stars, basically we are styling the stars here */

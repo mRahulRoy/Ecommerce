@@ -1,0 +1,21 @@
+.speedDial{
+    position: fixed; 
+    right: 27px;
+    top: 40px;
+}
+
+/* These classes are found using inspect so dont get confused where it came from */
+.speedDial .speedDialIcon{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+.MuiFab-primary {
+    color: #fff;
+    background-color:rgba(255, 255, 255, 0)  !important;
+}
+.MuiFab-root {
+    width: 39px !important;
+    height: 39px !important ;
+    background-color: white;
+}

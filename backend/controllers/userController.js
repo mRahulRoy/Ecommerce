@@ -6,10 +6,16 @@ const sendToken = require("../utils/jwtTokens");
 const sendEmail = require("../utils/sendEmail.js");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
+const cloudinary = require("cloudinary");
 
 /* ------------------------------ Register User ------------------------------*/
 
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
+  const my_cloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatars",
+    width: 150,
+    crop: "scale",
+  });
   const { name, email, password, role } = req.body;
   const user = await User.create({
     name,
@@ -17,8 +23,8 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     password,
     role,
     avatar: {
-      public_id: "This is a sample Id",
-      url: "profilepicurl",
+      public_id: my_cloud.public_id,
+      url: my_cloud.secure_url,
     },
   });
 
@@ -187,6 +193,24 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
   };
+
+  if(req.body.avatar!== ""){
+    const user = await User.findById(req.user.id);
+    const image_id = user.avatar.public_id;
+    await cloudinary.v2.uploader.destroy(image_id);
+    const my_cloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+    newUserData.avatar = {
+      public_id: my_cloud.public_id,
+      url: my_cloud.secure_url,
+    }
+  }
+
+
+
   //here we can access req.user becouse its created in AuthenticatedUser Middleware function. so its having all the details of the user.
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,

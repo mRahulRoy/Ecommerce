@@ -1,9 +1,9 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link, NavLink, useParams, useNavigate } from "react-router-dom";
-
 import "./navbar.css";
 import adwaitLogo from "../../../Images/logo.png";
 import { BsCart3 } from "react-icons/bs";
+import { useSelector, useDispatch } from "react-redux";
 
 //Importing React Icons
 import {
@@ -15,6 +15,7 @@ import {
 const NavBar = () => {
   const [keyword, setKeyword] = useState("");
   const navigate = useNavigate(); //we used useNavigate hook to move back and forth  instead of history couse it has deprecated
+  let loggedStatus ="Sign in";
 
   //This Function will handle Search Submit
   const searchSubmitHandler = (e) => {
@@ -27,7 +28,8 @@ const NavBar = () => {
     }
   };
 
-  const loggedStatus = "Sign in";
+
+
   return (
     <Fragment>
       <div className="preNav">

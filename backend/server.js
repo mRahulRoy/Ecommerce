@@ -2,7 +2,7 @@ const app = require("./App"); //importing necessary configurations from App file
 const dotenv = require("dotenv"); //importing 'dotenv'  third party modules
 const connectDatabase = require("./config/database"); // importing database connection function
 dotenv.config({ path: "backend/config/config.env" }) //  for using envoronmental variables we are using dotenv
-
+const cloudinary  = require("cloudinary");
 
 //-----Handling uncaught Exception
 /*This process object is an instance of the EventEmitter class. It does it contain its own pre-defined events such as exit which can be used to know when a program in Node.js has completed its execution.
@@ -21,6 +21,13 @@ process.on("uncaughtException", (err) => {
 
 // connecting to the database
 connectDatabase()
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME ,
+    api_key:  process.env.CLOUDINARY_API_KEY,
+    api_secret:  process.env.CLOUDINARY_API_SECRET,
+})
+
 const server = app.listen(process.env.PORT, () => {
     console.log("Server is Running", process.env.PORT)
 })

@@ -1,6 +1,7 @@
 import React from "react";
 import { ReactNavbar } from "overlay-navbar";
 import logo from "../../../Images/2phone.jfif";
+import "./header.css";
 const options = {
   burgerColor: "#eb4034",
   burgerColorHover: "#eb4034",
@@ -11,12 +12,12 @@ const options = {
   logoHoverColor: "#eb4034",
   link1Text: "Home",
   link2Text: "Products",
-  link3Text: "Contact",
-  link4Text: "About",
+  link3Text: "Account",
+  link4Text: "Login",
   link1Url: "/",
-  link2Url: "/product",
-  link3Url: "/contact",
-  link4Url: "/about",
+  link2Url: "/products",
+  link3Url: "/account",
+  link4Url: "/login",
   link1Size: "1.3vmax",
   link1Color: "rgba(35, 35, 35,0.8)",
   nav1justifyContent: "flex-end",
@@ -36,7 +37,7 @@ const options = {
 };
 const Header = () => {
   return (
-    <div style={{ display: "none" }}>
+    <div style={{}}>
       <ReactNavbar {...options} />
     </div>
   );

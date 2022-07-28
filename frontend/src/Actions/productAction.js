@@ -10,8 +10,7 @@ import {
 
 import axios from "axios";
 
-export const getProducts =
-  (keyword = "", currentPage = 1, price = [0, 2500], category, ratings = 1) =>
+export const getProducts = (keyword = "", currentPage = 1, price = [0, 2500], category, ratings = 1) =>
   async (dispatch, getState) => {
     try {
       dispatch({
@@ -24,14 +23,13 @@ export const getProducts =
         link = `/api/v1/products/?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
       }
 
- 
-   
       const { data } = await axios.get(link);
+      console.log(data);
       dispatch({
         type: ALL_PRODUCT_SUCCESS,
         payload: data,
       });
-      console.log(getState());
+      // console.log(getState());
     } catch (error) {
       dispatch({
         type: ALL_PRODUCT_FAIL,
